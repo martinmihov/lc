@@ -1,0 +1,6 @@
+package com.example.lc_demo.enumeration;
+
+public enum Role {
+    STUDENT,
+    TEACHER
+}
