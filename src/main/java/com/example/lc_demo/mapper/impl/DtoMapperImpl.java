@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-@Component
+@Component("dtoMapper")
 public class DtoMapperImpl implements DtoMapper {
 
     public StudentDTO toStudentDTO(User user) {

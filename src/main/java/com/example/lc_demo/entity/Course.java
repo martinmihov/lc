@@ -3,12 +3,14 @@ package com.example.lc_demo.entity;
 import com.example.lc_demo.enumeration.CourseType;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "COURSES",
         uniqueConstraints = {
                 @UniqueConstraint(name = "UniqueTypeAndName", columnNames = {"type", "name"})
         })
-public class Course {
+public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -9,9 +9,9 @@ import com.example.lc_demo.mapper.DtoMapper;
 import com.example.lc_demo.mapper.EntityMapper;
 import com.example.lc_demo.repository.UserRepository;
 import com.example.lc_demo.service.UserService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 

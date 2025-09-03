@@ -8,9 +8,9 @@ import com.example.lc_demo.mapper.DtoMapper;
 import com.example.lc_demo.repository.CourseRepository;
 import com.example.lc_demo.repository.UserRepository;
 import com.example.lc_demo.service.ReportService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,6 +40,7 @@ public class ReportServiceImpl implements ReportService {
     public long countTeachers() {
         return this.userRepository.countByRole(Role.TEACHER);
     }
+
     @Override
     public long countCoursesByType(String courseType) {
         CourseType type = CourseType.valueOf(courseType);

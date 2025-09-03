@@ -8,7 +8,7 @@ import com.example.lc_demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("entityMapper")
 public class EntityMapperImpl implements EntityMapper {
 
     private final CourseService courseService;
@@ -36,7 +36,8 @@ public class EntityMapperImpl implements EntityMapper {
         user.setName(dto.getName());
         user.setAge(dto.getAge());
         user.setGroup(dto.getGroup());
-        user.setCourses(this.courseService.courseResolver(dto));
+        if (dto.getCourses() != null && !dto.getCourses().isEmpty())
+            user.setCourses(this.courseService.courseResolver(dto.getCourses()));
 
         return user;
     }
