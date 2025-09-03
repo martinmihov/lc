@@ -8,6 +8,7 @@ import com.example.lc_demo.entity.User;
 import com.example.lc_demo.mapper.DtoMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Component("dtoMapper")
@@ -32,12 +33,13 @@ public class DtoMapperImpl implements DtoMapper {
         dto.setName(user.getName());
         dto.setAge(user.getAge());
         dto.setGroup(user.getGroup());
-        dto.setCourses(user.getCourses().stream().map(c -> {
-            CourseDTO courseDTO = new CourseDTO();
-            courseDTO.setId(c.getId());
-            courseDTO.setName(c.getName());
-            courseDTO.setType(c.getType());
-            return courseDTO;
-        }).collect(Collectors.toSet()));
+        dto.setCourses(user.getCourses() == null ? Collections.emptySet() :
+                user.getCourses().stream().map(c -> {
+                    CourseDTO courseDTO = new CourseDTO();
+                    courseDTO.setId(c.getId());
+                    courseDTO.setName(c.getName());
+                    courseDTO.setType(c.getType());
+                    return courseDTO;
+                }).collect(Collectors.toSet()));
     }
 }
