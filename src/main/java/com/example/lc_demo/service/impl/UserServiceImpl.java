@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public <T> BaseUserDTO getUser(String id) {
+    public BaseUserDTO getUser(String id) {
         Optional<User> user = this.userRepository.findById(id);
         if (user.isPresent()) {
             return user.get().getRole() == Role.STUDENT ?
