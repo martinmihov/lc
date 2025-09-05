@@ -16,5 +16,7 @@ public interface UserService {
 
     void deleteUser(String id);
 
+    void deleteTeacher(String id);
+
     BaseUserDTO getUser(String id);
 }

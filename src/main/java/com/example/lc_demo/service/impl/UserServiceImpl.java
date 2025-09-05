@@ -3,6 +3,7 @@ package com.example.lc_demo.service.impl;
 import com.example.lc_demo.dto.BaseUserDTO;
 import com.example.lc_demo.dto.StudentDTO;
 import com.example.lc_demo.dto.TeacherDTO;
+import com.example.lc_demo.entity.Course;
 import com.example.lc_demo.entity.User;
 import com.example.lc_demo.enumeration.Role;
 import com.example.lc_demo.mapper.DtoMapper;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -74,6 +76,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String id) {
+        this.userRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteTeacher(String id) {
+        Optional<User> foundTeacher = this.userRepository.findByIdAndRole(id, Role.TEACHER);
+
+        foundTeacher.ifPresentOrElse(user -> user.getCourses().forEach(fc -> {
+            List<User> teachers = this.userRepository.findByRoleAndCourses_Id(user.getRole(), fc.getId());
+            if (teachers != null && teachers.size() == 1) {
+                throw new IllegalArgumentException("Teacher with id " + id + " cannot be deleted due being the solo teacher in " +
+                        fc.getName() + " course!");
+            }
+        }), () -> {
+            throw new IllegalArgumentException("Teacher not found with id " + id);
+        });
+
         this.userRepository.deleteById(id);
     }
 

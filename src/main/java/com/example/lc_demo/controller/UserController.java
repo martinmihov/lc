@@ -60,6 +60,13 @@ public class UserController {
         return ResponseEntity.ok(teacher);
     }
 
+    @DeleteMapping("/teacher/{id}")
+    public ResponseEntity<Void> deleteTeacher(@PathVariable String id) {
+        this.userService.deleteTeacher(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         this.userService.deleteUser(id);
