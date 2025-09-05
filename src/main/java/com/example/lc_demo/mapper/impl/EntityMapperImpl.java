@@ -36,8 +36,7 @@ public class EntityMapperImpl implements EntityMapper {
         user.setName(dto.getName());
         user.setAge(dto.getAge());
         user.setGroup(dto.getGroup());
-        if (dto.getCourses() != null && !dto.getCourses().isEmpty())
-            user.setCourses(this.courseService.courseResolver(dto.getCourses()));
+        user.setCourses(this.courseService.courseResolver(dto.getCourses()));
 
         return user;
     }

@@ -1,5 +1,6 @@
 package com.example.lc_demo.dto;
 
+import java.util.Collections;
 import java.util.Set;
 
 public abstract class BaseUserDTO {
@@ -8,7 +9,7 @@ public abstract class BaseUserDTO {
     private String name;
     private Integer age;
     private String group;
-    private Set<CourseDTO> courses;
+    private Set<CourseDTO> courses = Collections.emptySet();
 
     public String getId() {
         return id;
